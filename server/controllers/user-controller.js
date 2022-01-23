@@ -8,7 +8,7 @@ class UserController {
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData)
         } catch (e) {
-            console.log("Ошибка в контроллере registration", e)
+            next(e)
         }
 
     }
@@ -18,7 +18,7 @@ class UserController {
         try {
 
         } catch (e) {
-            console.log("Ошибка в контроллере login")
+            next(e)
         }
 
     }
@@ -28,7 +28,7 @@ class UserController {
         try {
 
         } catch (e) {
-            console.log("Ошибка в контроллере logout")
+            next(e)
         }
 
     }
@@ -37,7 +37,7 @@ class UserController {
         try {
 
         } catch (e) {
-            console.log("Ошибка в контроллере refresh")
+            next(e)
         }
     }
 
@@ -45,7 +45,7 @@ class UserController {
         try {
             res.json(['123'])
         } catch (e) {
-            console.log("Ошибка в контроллере getUsers")
+            next(e)
         }
     }
 
@@ -55,7 +55,7 @@ class UserController {
             await UserService.activate(activationLink)
             return res.redirect(process.env.CLIENT_URL)
         } catch (e) {
-            console.log("Ошибка в контроллере активации activate", e)
+            next(e)
         }
     }
 
