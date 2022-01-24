@@ -21,5 +21,5 @@ Backend
 Frontend
 - react
 - typescript
-- redux
+- MobX
 - axios
