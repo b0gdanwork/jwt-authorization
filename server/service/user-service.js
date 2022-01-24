@@ -27,7 +27,6 @@ class UserService {
     }
 
     async activate(activationLink) {
-        console.log('activate', activationLink)
         const user = await UserModel.findOne({activationLink})
         if (!user) {
             throw ApiError.BadRequest('Ссылка на активацию не актвивна')
@@ -41,7 +40,6 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest(`Пользователь с  ${email} не существует`)
         }
-        console.log(password, user.password)
         const isPassEquals = await bcript.compare(String(password), user.password)
         if (!isPassEquals) {
             throw ApiError.BadRequest(`Неверный пароль`)
@@ -55,7 +53,22 @@ class UserService {
     async logout(refreshToken) {
         const token = await tokenService.remove(refreshToken)
         return token
+    }
 
+    async refresh(refreshToken) {
+        if(!refreshToken) {
+            throw ApiError.UnauthorizedError()
+        }
+        const userData = tokenService.validateRefreshToken(refreshToken)
+        const tokenFromDb = tokenService.findToken(refreshToken)
+        if (!userData || !tokenFromDb) {
+            throw ApiError.UnauthorizedError()
+        }
+        const user = await UserModel.findById(userData.id)
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({...userDto})
+        await tokenService.saveToken(userDto.id, tokens.refreshToken)
+        return {...tokens, user: UserDto}
     }
 }
 
