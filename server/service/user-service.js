@@ -1,7 +1,7 @@
 const UserModel = require("../models/user-model")
 const bcript = require("bcrypt")
 const uuid = require("uuid")
-const MailService = require("./mail-service")
+// const MailService = require("./mail-service")
 const tokenService = require("./token-service")
 const UserDto = require("../dtos/user-dto")
 const ApiError = require("../exceptions/api-error")
@@ -69,6 +69,11 @@ class UserService {
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
         return {...tokens, user: UserDto}
+    }
+
+    async GetAllUsers() {
+        const users = await UserModel.find()
+        return users
     }
 }
 
