@@ -15,7 +15,6 @@ const nodemailer = require("nodemailer")
     }
 
     async SendActivationMail(to, link) {
-        console.log('SendActivationMail1', this.transporter.options,  process.env.SMTP_HOST, process.env.SMTP_PORT, process.env.SMTP_USER, process.env.SMTP_PASSWORD)
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,
@@ -29,7 +28,6 @@ const nodemailer = require("nodemailer")
                 </div>
                 `
         })
-        console.log('SendActivationMail2')
     }
 }
 
