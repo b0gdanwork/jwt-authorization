@@ -1,35 +1,35 @@
 const nodemailer = require("nodemailer")
 
-class MailService {
+ class MailService {
 
     constructor() {
         this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            post: process.env.SMTP_PORT,
-            secure: true,
+            host: "smtp.gmail.com",
+            post: 587,
+            secure: false,
             auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD
+                user: 'testbogdan970@gmail.com',
+                pass: '123454321Qw'
                 }
             })
     }
 
     async SendActivationMail(to, link) {
+        console.log('SendActivationMail1', this.transporter.options,  process.env.SMTP_HOST, process.env.SMTP_PORT, process.env.SMTP_USER, process.env.SMTP_PASSWORD)
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
-            to: to,
+            to,
             subject: 'Актвивация аккаунта на ' + process.env.API_URL,
-            text: '',
-            html: 
+            text: link,
+            html:
                 `
                 <div>
                     <h1>Для активации перейдите по ссылке:</h1>
-                    <a href="${link}"></a>
+                    <a href="${link}">${link}</a>
                 </div>
                 `
         })
-        console.log('SendActivationMail')
-
+        console.log('SendActivationMail2')
     }
 }
 
