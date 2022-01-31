@@ -11,7 +11,7 @@
 Перейдите в папку /server и запустить <br>
 #### `npm run dev` <br>
 Перейдите в папку /client и запустить <br>
-#### `npm run dev`<br>
+#### `npm start`<br>
 
 ## Стек 
 Backend
