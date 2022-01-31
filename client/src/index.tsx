@@ -2,6 +2,8 @@ import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Store from "./store/store";
+import {BrowserRouter} from "react-router-dom";
+
 
 interface State {
   store:Store
@@ -14,9 +16,9 @@ export const Context = createContext<State>({
 
 ReactDOM.render(
   <Context.Provider value={{store}}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
   </Context.Provider>
   ,
   document.getElementById('root')

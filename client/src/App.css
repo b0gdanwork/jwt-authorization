@@ -1,0 +1,19 @@
+.ant-layout-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 70px - 64px)
+}
+
+.ant-layout-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.have-account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
