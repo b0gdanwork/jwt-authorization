@@ -8,7 +8,7 @@ const ApiRoute = () => {
   const {store} = useContext(Context)
 
   return (
-    store.isAuth ?
+    !store.isAuth ?
     <Routes>
       {
         publicRouters.map(item=>
